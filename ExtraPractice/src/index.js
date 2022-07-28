@@ -58,30 +58,51 @@ document.addEventListener('DOMContentLoaded', () => {
                 //checking to see if good/bad status changes on click
                 console.log(dog)
 
-                patchPups(dog)
-
+                //because we are just changing a small portion of the data, we are sending a patch
+                //url is now dynamic to refer to the id of the dog that is being click to good/bad
+                fetch('http://localhost:3000/pups/' + dog.id, {
+                    method: "PATCH",
+                    headers: {
+                        "content-type": "application/json"
+                    },
+                    //above we changed the dog object to good or bad. 
+                    //below, we are updating our database with the latest good/bad status
+                    body: JSON.stringify({
+                        isGoodDog: dog.isGoodDog
+                    })
+                })
+                    .then(r => r.json())
             })
-        })
-    } //end of render pups function
 
-    //PATCH
-    function patchPups(dog) {
-        //because we are just changing a small portion of the data, we are sending a patch
-        //url is now dynamic to refer to the id of the dog that is being click to good/bad
-        fetch('http://localhost:3000/pups/' + dog.id, {
-            method: "PATCH",
-            headers: {
-                "content-type": "application/json"
-            },
-            //above we changed the dog object to good or bad. 
-            //below, we are updating our database with the latest good/bad status
-            body: JSON.stringify({
-                isGoodDog: dog.isGoodDog
-            })
+
         })
-            .then(r => r.json())
+
     }
 
 })
 
 
+ //process json
+        //process results using:
+        /////"pups" array from dbjson
+        /////pass through parameter of dog
+        /////we ultimately want to renderPups (which will grab names and populate div bar) for each dog
+        /////fetch the server data
+
+//create a renderPups function (using 'dog' as a variable)
+
+
+//create img, h2, button
+   //populate img, h2, button
+        //give conditional text content w/boolean/ternery
+        ////if 'isGoodDog' === true, text should read 'Good dog!;
+        ////else, text should read 'Bad dog!'
+        //append img, h2, button to dogInfo
+        //append span tag to div
+
+            //### STEP 3: SHOW MORE INFO ABOUT EACH PUP
+    //add event listener to span with 'click' event
+            //get div w/ id of "dog-bar"
+            //create span tag
+            //populate span tag with pups names
+            //divide out dog ids in span
